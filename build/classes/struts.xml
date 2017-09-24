@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<constant name="struts.serve.static.browserCache" value="false"></constant>
+	<constant name="struts.configuration.xml.reload" value="true"></constant>
+	<constant name="struts.devMode" value="false"></constant>
+	<constant name="struts.ui.theme" value="simple"></constant>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	
+	<package name="user" extends="struts-default">
+		<action name="user_login" class="userAction" method="login">
+			<result type= "chain" name="success">category_get_all</result>
+			<result name="failure">/login.jsp</result>
+		</action>
+		<action name="user_register" class="userAction" method="add">
+			<result name="success">/register.jsp</result>
+			<result name="failure">/register.jsp</result>
+		</action>
+		<action name="user_logout" class="userAction" method="logout">
+			<result name="success">/login.jsp</result>
+		</action>
+		<action name="user_get_all" class="userAction" method="getAll">
+			<result name="success">/userList.jsp</result>
+		</action>
+		<action name="category_get_all" class="goodsAction" method="getAllCategories">
+			<result name="success">/main.jsp</result>
+		</action>
+		<action name="open_add_flower" class="goodsAction" method="getAllCategories">
+			<result name="success">/addFlower.jsp</result>
+		</action>
+		<action name="goods_get" class="goodsAction" method="get">
+			<result name="success">/showFlower.jsp</result>
+		</action>
+		<action name="open_flower_list" class="goodsAction" method="get">
+			<result name="success">/flowerList.jsp</result>
+		</action>
+		<action name="category_add" class="goodsAction" method="addCategory">
+			<result name="success">/addCategory.jsp</result>
+			<result name="failure">/addCategory.jsp</result>
+		</action>
+		<action name="flower_add" class="goodsAction" method="add">
+			<!-- <interceptor-ref name="fileUpload">
+				<param name="allowedType">image/png,image/gif,image/jpeg,image/jpg</param>
+				<param name="maximumSize">10240000</param>
+			</interceptor-ref> -->
+			<result name="success">/addFlower.jsp</result>
+			<result name="failure">/addFlower.jsp</result>
+		</action>
+		<action name="order_get_all" class="orderAction" method="getAllOrders">
+			<result name="success">/orderList.jsp</result>
+		</action>
+		<action name="ordersDetails_get" class="orderAction" method="getOrdersDetail">
+			<result name="success">/orderDetail.jsp</result>
+		</action>
+		<action name="put_cart" class="orderAction" method="addToCart">
+			<result name="success" type= "chain">goods_get</result>
+		</action>
+		<action name="update_cart" class="orderAction" method="updateCart">
+			<result name="success">cart.jsp</result>
+		</action>
+		<action name="order_order" class="orderAction" method="order">
+			<result name="success">orderSuccess.jsp</result>
+			<result name="failure">cart.jsp</result>
+		</action>
+	</package>
+</struts>

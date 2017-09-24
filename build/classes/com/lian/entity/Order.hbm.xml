@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.lian.entity.Order" table="orders" catalog="flower">
+		<id name="ordersId" type="integer" column="ordersId">
+			<generator class="native"/>
+		</id>
+		<many-to-one name="user" class="com.lian.entity.User" column="username" property-ref="userName" not-null="true" lazy="false"></many-to-one>
+		<property name="num" type="integer" column="num" not-null="true" />
+		<property name="sum" type="float" column="sum" not-null="true" />
+		<property name="createTime" type="java.sql.Timestamp" column="createTime" not-null="true" />
+		<set name="ordersDetails" inverse="true" cascade="all">
+            <key column="ordersId" />
+            <one-to-many class="com.lian.entity.OrdersDetail" />
+        </set>
+	</class>
+</hibernate-mapping>

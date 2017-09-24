@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.lian.entity.Good" table="goods" catalog="flower">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+		<property name="goodsName" type="string" column="goodsName" not-null="true" />
+		<property name="description" type="string" column="description" />
+		<property name="price" type="float" column="price" not-null="true" />
+		<many-to-one name="category" class="com.lian.entity.Category" column="categoryId" not-null="true"></many-to-one>
+		<property name="imgUrl" type="string" column="imgUrl" />
+	</class>
+</hibernate-mapping>
